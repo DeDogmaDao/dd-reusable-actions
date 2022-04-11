@@ -43,11 +43,6 @@ inputs:
   REPOSITORY_NAME:
     description: "Pure name of repository. ex: dt-backend"
     required: true
-  image_name:
-    description: "Name of the image to push"
-    required: true
-  tag:
-    description: "How to tag the image. Default: latest"
 
 runs:
   using: "composite"
