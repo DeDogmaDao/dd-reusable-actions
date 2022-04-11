@@ -1,0 +1,84 @@
+name: "Deploy to server"
+description: "Deploy to server with same input/secrets"
+
+
+secrets:
+  SSH_ACTION_HOST:
+    required: true
+  SSH_ACTION_USER:
+    required: true
+  SSH_ACTION_KEY:
+    required: true
+  DOMAIN:
+    required: true
+  BRANCH:
+    required: true
+  DEBUG:
+    required: true
+  SECRET_KEY:
+    required: true
+  ALLOWED_HOSTS:
+    required: true
+  CORS_ORIGIN_ALLOW_ALL:
+    required: true
+  CORS_ORIGIN_WHITELIST:
+    required: true
+  POSTGRES_HOST:
+    required: true
+  POSTGRES_PORT:
+    required: true
+  POSTGRES_USER:
+    required: true
+  POSTGRES_PASSWORD:
+    required: true
+  POSTGRES_DB:
+    required: true
+  DBPOOL_HOST:
+    required: true
+  DBPOOL_PORT:
+    required: true
+
+
+inputs:
+  REPOSITORY_NAME:
+    description: "Pure name of repository. ex: dt-backend"
+    required: true
+  image_name:
+    description: "Name of the image to push"
+    required: true
+  tag:
+    description: "How to tag the image. Default: latest"
+
+runs:
+  using: "composite"
+  steps:
+      - name: Deploy package to Server
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            export DEBUG=${{ secrets.DEBUG }}
+            export SECRET_KEY=${{ secrets.SECRET_KEY }}
+            export ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}
+            export CORS_ORIGIN_ALLOW_ALL=${{ secrets.CORS_ORIGIN_ALLOW_ALL }}
+            export CORS_ORIGIN_WHITELIST=${{ secrets.CORS_ORIGIN_WHITELIST }}
+            export POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}
+            export POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}
+            export POSTGRES_USER=${{ secrets.POSTGRES_USER}}
+            export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+            export POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+            export DBPOOL_HOST=${{ secrets.DBPOOL_HOST }}
+            export DBPOOL_PORT=${{ secrets.DBPOOL_PORT }}
+            export DOMAIN=${{ secrets.DOMAIN }}
+            export REPOSITORY_NAME=${{ inputs.REPOSITORY_NAME }}
+            export BRANCH=${{ secrets.BRANCH }}
+            curl -H "Authorization: token ${{ secrets.PERSONAL_GITHUB_TOKEN }}" https://raw.githubusercontent.com/DeDogmaDao/${{ inputs.REPOSITORY_NAME }}/${{ secrets.BRANCH }}/docker-compose.deploy.yml > docker-compose.deploy.yml
+            echo ${{ secrets.PERSONAL_GITHUB_TOKEN }} | docker login ghcr.io -u flokibb --password-stdin
+            docker network create ddd_network || true
+            docker volume create --name=mediafiles || true
+            docker volume create --name=staticfiles || true
+            docker volume create --name=database || true
+            docker-compose -f docker-compose.deploy.yml down
+            docker-compose -f docker-compose.deploy.yml up -d
+          host: ${{ secrets.SSH_ACTION_HOST }}
+          user: ${{ secrets.SSH_ACTION_USER }}
+          key: ${{ secrets.SSH_ACTION_KEY }}
