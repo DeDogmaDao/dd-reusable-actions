@@ -39,6 +39,8 @@ on:
         required: true
       DBPOOL_PORT:
         required: true
+      PERSONAL_GITHUB_TOKEN:
+        required: true
 
 
     inputs:
