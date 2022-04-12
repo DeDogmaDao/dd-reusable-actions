@@ -45,11 +45,11 @@ inputs:
     description: "Pure name of repository. ex: dt-backend"
     required: true
 
-runs:
-  using: "composite"
-  steps:
-      - name: Deploy package to Server
-        uses: fifsky/ssh-action@master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fifsky/ssh-action@master
         with:
           command: |
             export DEBUG=${{ secrets.DEBUG }}
