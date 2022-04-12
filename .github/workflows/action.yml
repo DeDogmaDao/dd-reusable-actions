@@ -57,8 +57,10 @@ jobs:
     steps:
       - name: "command"
         run: |
-          if [ "${{ inputs.COMMAND }}" == 'refs/heads/develop' ]; then echo "ENV_PREFIX=STAGE_" >> $GITHUB_ENV; else echo "ENV_PREFIX=" >> $GITHUB_ENV; fi
+          if [ "${{ inputs.COMMAND }}" == "develop" ]; then echo "ENV_PREFIX=STAGE_" >> $GITHUB_ENV; else echo "ENV_PREFIX=" >> $GITHUB_ENV; fi
+          echo ${{ inputs.COMMAND }}
           echo ${{ env.ENV_PREFIX }}
+          echo ${{ secrets.REF_NAME }}
 #      - uses: fifsky/ssh-action@master
 #        with:
 #          command: |
