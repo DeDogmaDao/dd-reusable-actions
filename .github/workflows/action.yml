@@ -61,6 +61,7 @@ jobs:
           echo ${{ inputs.COMMAND }}
           echo ${{ env.ENV_PREFIX }}
           echo ${{ secrets.REF_NAME }}
+          echo ${{ inputs.REPOSITORY_NAME }}
 #      - uses: fifsky/ssh-action@master
 #        with:
 #          command: |
