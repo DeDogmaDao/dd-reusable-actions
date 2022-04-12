@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "command"
-      - uses: fifsky/ssh-action@master
+        uses: fifsky/ssh-action@master
         with:
           command: |
             export DEBUG=${{ secrets.DEBUG }}
