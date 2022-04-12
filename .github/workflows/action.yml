@@ -56,7 +56,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "command"
-        run: echo ${{ secrets.REF_NAME }}${{ inputs.COMMAND }}
+        run: |
+          if [ "${{ inputs.COMMAND }}" == 'refs/heads/develop' ]; then echo "ENV_PREFIX=STAGE_" >> $GITHUB_ENV; else echo "ENV_PREFIX=" >> $GITHUB_ENV; fi
+          echo ${{ env.ENV_PREFIX }}
 #      - uses: fifsky/ssh-action@master
 #        with:
 #          command: |
