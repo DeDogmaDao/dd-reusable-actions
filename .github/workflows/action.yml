@@ -2,8 +2,10 @@ name: "Deploy to server"
 
 on:
   workflow_call:
-#    secrets:
-#      SSH_ACTION_HOST:
+    secrets:
+      REF_NAME:
+        required: true
+    #      SSH_ACTION_HOST:
 #        required: true
 #      SSH_ACTION_USER:
 #        required: true
@@ -42,7 +44,7 @@ on:
     inputs:
       REPOSITORY_NAME:
         description: "Pure name of repository. ex: dt-backend"
-        required: true
+        required: false
         type: string
       COMMAND:
         description: "Pure name of repository. ex: dt-backend"
@@ -54,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "command"
-        run: echo ${{ inputs.COMMAND }}
+        run: echo ${{ secrets.REF_NAME }}${{ inputs.COMMAND }}
 #      - uses: fifsky/ssh-action@master
 #        with:
 #          command: |
