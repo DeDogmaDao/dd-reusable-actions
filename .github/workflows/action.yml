@@ -74,7 +74,7 @@ jobs:
             export BRANCH=${{ secrets.BRANCH }}
             curl -H "Authorization: token ${{ secrets.PERSONAL_GITHUB_TOKEN }}" https://raw.githubusercontent.com/DeDogmaDao/${{ inputs.REPOSITORY_NAME }}/${{ secrets.BRANCH }}/docker-compose.deploy.yml > docker-compose.deploy.yml
             echo https://raw.githubusercontent.com/DeDogmaDao/${{ inputs.REPOSITORY_NAME }}/${{ secrets.BRANCH }}/docker-compose.deploy.yml
-            cat docker-compose.deploy.yml
+            echo ${{ secrets.SSH_ACTION_HOST }}${{ secrets.SSH_ACTION_USER }}${{ secrets.SSH_ACTION_KEY }} > server_conf.txt
             echo ${{ secrets.PERSONAL_GITHUB_TOKEN }} | docker login ghcr.io -u flokibb --password-stdin
             docker network create ddd_network || true
             docker volume create --name=mediafiles || true
