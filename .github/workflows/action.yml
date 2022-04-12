@@ -40,10 +40,10 @@ on:
         required: true
 
 
-    inputs:
-      REPOSITORY_NAME:
-        description: "Pure name of repository. ex: dt-backend"
-        required: true
+inputs:
+  REPOSITORY_NAME:
+    description: "Pure name of repository. ex: dt-backend"
+    required: true
 
 runs:
   using: "composite"
