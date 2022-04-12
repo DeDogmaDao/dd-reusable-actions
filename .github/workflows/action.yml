@@ -58,12 +58,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "command"
-        run: |
-          if [ "${{ inputs.COMMAND }}" == "develop" ]; then echo "ENV_PREFIX=STAGE_" >> $GITHUB_ENV; else echo "ENV_PREFIX=" >> $GITHUB_ENV; fi
-          echo ${{ inputs.COMMAND }}
-          echo ${{ env.ENV_PREFIX }}
-          echo ${{ secrets.REF_NAME }}
-          echo ${{ inputs.REPOSITORY_NAME }}
       - uses: fifsky/ssh-action@master
         with:
           command: |
@@ -82,8 +76,6 @@ jobs:
             export DOMAIN=${{ secrets.DOMAIN }}
             export REPOSITORY_NAME=${{ inputs.REPOSITORY_NAME }}
             export BRANCH=${{ secrets.BRANCH }}
-            echo $BRANCH
-            echo $REPOSITORY_NAME
             curl -H "Authorization: token ${{ secrets.PERSONAL_GITHUB_TOKEN }}" https://raw.githubusercontent.com/DeDogmaDao/${{ inputs.REPOSITORY_NAME }}/${{ secrets.BRANCH }}/docker-compose.deploy.yml > docker-compose.deploy.yml
             echo https://raw.githubusercontent.com/DeDogmaDao/${{ inputs.REPOSITORY_NAME }}/${{ secrets.BRANCH }}/docker-compose.deploy.yml
             cat docker-compose.deploy.yml
