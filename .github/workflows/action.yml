@@ -15,42 +15,38 @@ on:
         required: true
       BRANCH:
         required: true
-      DEBUG:
-        required: true
-      SECRET_KEY:
-        required: true
-      ALLOWED_HOSTS:
-        required: true
-      CORS_ORIGIN_ALLOW_ALL:
-        required: true
-      CORS_ORIGIN_WHITELIST:
-        required: true
-      POSTGRES_HOST:
-        required: true
-      POSTGRES_PORT:
-        required: true
-      POSTGRES_USER:
-        required: true
-      POSTGRES_PASSWORD:
-        required: true
-      POSTGRES_DB:
-        required: true
-      DBPOOL_HOST:
-        required: true
-      DBPOOL_PORT:
-        required: true
       PERSONAL_GITHUB_TOKEN:
         required: true
+      DEBUG:
+        required: false
+      SECRET_KEY:
+        required: false
+      ALLOWED_HOSTS:
+        required: false
+      CORS_ORIGIN_ALLOW_ALL:
+        required: false
+      CORS_ORIGIN_WHITELIST:
+        required: false
+      POSTGRES_HOST:
+        required: false
+      POSTGRES_PORT:
+        required: false
+      POSTGRES_USER:
+        required: false
+      POSTGRES_PASSWORD:
+        required: false
+      POSTGRES_DB:
+        required: false
+      DBPOOL_HOST:
+        required: false
+      DBPOOL_PORT:
+        required: false
 
 
     inputs:
       REPOSITORY_NAME:
         description: "Pure name of repository. ex: dt-backend"
         required: false
-        type: string
-      COMMAND:
-        description: "Pure name of repository. ex: dt-backend"
-        required: true
         type: string
 
 jobs:
