@@ -1,4 +1,4 @@
-name: "Deploy to server"
+name: 'Deploy to server'
 
 on:
   workflow_call:
@@ -10,6 +10,8 @@ on:
       SSH_ACTION_USER:
         required: true
       SSH_ACTION_KEY:
+        required: true
+      SSH_ACTION_PORT:
         required: true
       DOMAIN:
         required: true
@@ -41,11 +43,15 @@ on:
         required: false
       DBPOOL_PORT:
         required: false
-
+      BACKEND_URL:
+        required: false
+      ROBOTS_TXT:
+        required: false
+      
 
     inputs:
       REPOSITORY_NAME:
-        description: "Pure name of repository. ex: dt-backend"
+        description: 'Pure name of repository. ex: dt-backend'
         required: false
         type: string
 
@@ -53,7 +59,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: "command"
+      - name: 'command'
         uses: fifsky/ssh-action@master
         with:
           command: |
@@ -85,3 +91,4 @@ jobs:
           host: ${{ secrets.SSH_ACTION_HOST }}
           user: ${{ secrets.SSH_ACTION_USER }}
           key: ${{ secrets.SSH_ACTION_KEY }}
+          port: ${{ secrets.SSH_ACTION_PORT }}
