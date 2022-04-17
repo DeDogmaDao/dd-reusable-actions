@@ -11,6 +11,8 @@ on:
         required: true
       SSH_ACTION_KEY:
         required: true
+      SSH_ACTION_PORT:
+        required: true
       DOMAIN:
         required: true
       BRANCH:
@@ -41,7 +43,11 @@ on:
         required: false
       DBPOOL_PORT:
         required: false
-
+      BACKEND_URL:
+        required: false
+      ROBOTS_TXT:
+        required: false
+      
 
     inputs:
       REPOSITORY_NAME:
@@ -85,3 +91,4 @@ jobs:
           host: ${{ secrets.SSH_ACTION_HOST }}
           user: ${{ secrets.SSH_ACTION_USER }}
           key: ${{ secrets.SSH_ACTION_KEY }}
+          port: ${{ secrets.SSH_ACTION_PORT }}
