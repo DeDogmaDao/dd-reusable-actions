@@ -51,7 +51,7 @@ on:
 
     inputs:
       REPOSITORY_NAME:
-        description: 'Pure name of repository. ex: dt-backend'
+        description: "Pure name of repository. ex: dt-backend"
         required: false
         type: string
 
