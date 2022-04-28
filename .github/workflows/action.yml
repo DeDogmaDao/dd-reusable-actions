@@ -75,6 +75,8 @@ jobs:
             export POSTGRES_DB=${{ secrets.POSTGRES_DB }}
             export DBPOOL_HOST=${{ secrets.DBPOOL_HOST }}
             export DBPOOL_PORT=${{ secrets.DBPOOL_PORT }}
+            export BACKEND_URL=${{ secrets.BACKEND_URL }}
+            export ROBOTS_TXT=${{ secrets.ROBOTS_TXT }}
             export DOMAIN=${{ secrets.DOMAIN }}
             export REPOSITORY_NAME=${{ inputs.REPOSITORY_NAME }}
             export BRANCH=${{ secrets.BRANCH }}
