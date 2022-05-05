@@ -86,8 +86,9 @@ jobs:
             docker volume create --name=mediafiles || true
             docker volume create --name=staticfiles || true
             docker volume create --name=database || true
-            docker-compose -f docker-compose.deploy.yml down
             docker rmi -f ghcr.io/dedogmadao/${{ inputs.REPOSITORY_NAME }}/${{ inputs.REPOSITORY_NAME }}:${{ secrets.BRANCH }}-latest || echo "Ok"
+            docker pull ghcr.io/dedogmadao/${{ inputs.REPOSITORY_NAME }}/${{ inputs.REPOSITORY_NAME }}:${{ secrets.BRANCH }}-latest
+            docker-compose -f docker-compose.deploy.yml down
             docker-compose -f docker-compose.deploy.yml up -d
             rm -rf docker-compose.deploy.yml
           host: ${{ secrets.SSH_ACTION_HOST }}
